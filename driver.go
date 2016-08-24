@@ -11,9 +11,9 @@ import (
 	"sync"
 	"time"
 
-	azure "github.com/Azure/azure-sdk-for-go/storage"
 	log "github.com/Sirupsen/logrus"
 	"github.com/docker/go-plugins-helpers/volume"
+	azure "github.com/getblank/azure-sdk-for-go/storage"
 )
 
 type volumeDriver struct {
@@ -82,7 +82,7 @@ func (v *volumeDriver) Create(req volume.Request) (resp volume.Response) {
 	logctx.Debug("request accepted")
 
 	// Create azure file share
-	if ok, err := v.cl.CreateShareIfNotExists(share); err != nil {
+	if ok, err := v.cl.CreateShareIfNotExists(share, req.Options["quota"]); err != nil {
 		resp.Err = fmt.Sprintf("error creating azure file share: %v", err)
 		logctx.Error(resp.Err)
 		return

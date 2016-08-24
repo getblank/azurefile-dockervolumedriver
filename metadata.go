@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	recognizedOptions = []string{"share", "filemode", "dirmode", "uid", "gid", "nolock", "remotepath"}
+	recognizedOptions = []string{"share", "filemode", "dirmode", "uid", "gid", "nolock", "remotepath", "quota"}
 )
 
 type volumeMetadata struct {
@@ -28,6 +28,7 @@ type VolumeOptions struct {
 	GID        string `json:"gid"`
 	NoLock     bool   `json:"nolock"`
 	RemotePath string `json:"remotepath"`
+	Quota      string `json:"quota"`
 }
 
 type metadataDriver struct {
@@ -64,6 +65,7 @@ func (m *metadataDriver) Validate(meta map[string]string) (volumeMetadata, error
 	opts.GID = meta["gid"]
 	opts.UID = meta["uid"]
 	opts.RemotePath = meta["remotepath"]
+	opts.Quota = meta["quota"]
 
 	if meta["nolock"] == "true" {
 		opts.NoLock = true

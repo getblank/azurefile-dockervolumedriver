@@ -3,10 +3,10 @@ package main
 import (
 	"os"
 
-	azure "github.com/Azure/azure-sdk-for-go/storage"
 	log "github.com/Sirupsen/logrus"
 	"github.com/codegangsta/cli"
 	"github.com/docker/go-plugins-helpers/volume"
+	azure "github.com/getblank/azure-sdk-for-go/storage"
 )
 
 const (
